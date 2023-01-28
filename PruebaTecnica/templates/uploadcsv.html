@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Prueba tecnica Onestic</title>
+   </head>
+   <body>
+      <header>
+         <h1>Prueba tecnica Onestic</h1>
+      </header>
+      <form action="downloadfiles" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="file1">Selecciona el archivo productos.csv:</label>
+        <input type="file" name="productoscsv" accept=".csv">
+        <br>
+        <label for="file2">Selecciona el archivo orders.csv:</label>
+        <input type="file" name="orderscsv" accept=".csv">
+        <br>
+        <label for="file3">Selecciona el archivo customers.csv:</label>
+        <input type="file" name="customerscsv" accept=".csv">
+        <br>
+        <input type="submit" value="Subir archivos">
+      </form>
+      
+      
+   </body>
+</html>
