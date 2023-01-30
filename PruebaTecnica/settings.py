@@ -50,10 +50,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'PruebaTecnica.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['E:/Desarrolo Web/Django/PruebaTecnica/PruebaTecnica/templates'],
+        'DIRS': [BASE_DIR / 'PruebaTecnica/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
