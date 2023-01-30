@@ -11,14 +11,14 @@ He realizado la siguiente prueba.
 Para la realización de la prueba he elegido Python, ya que me siento muy comodo y para trabajar con
 datos en formato csv es muy sencillo. He desarrollado una clase Reports.py, donde se encuentran tres metodos, cada metodo genera un reporte. Luego he usado el frameword de Django, donde 
 he creado un pequeño frontend para subir los tres archivos productos.csv, orders.csv y customers.cvs.
-Una vez iniciado el servidor ir a tu navegador, debe de ser Google Chrome, a la siguiente URL http://localhost:8000/uploadfiles/ .Una vez subidos se apreta al boton "Subir Archivos" y automaticamente el cliente hace una peticion POST al servidor http://127.0.0.1:8000/uploadfiles/downloadfiles y te descarga automaticamente un .zip que contiene los tres reportes. En conclusion, he cubierto los requisitos minimos de la prueba, creado una pequeña API y un frontend basico para interactuar. Hago incapie en que debe ser Google Chrome el navegador ya que yo uso de normal Firefox y me daba errores.
+Una vez iniciado el servidor ir a tu navegador, debe de ser Google Chrome, a la siguiente URL http://localhost:8000/uploadfiles/ .Una vez subidos se apreta al boton "Subir Archivos" y automaticamente el cliente hace una peticion POST al servidor http://127.0.0.1:8000/uploadfiles/downloadfiles y te descarga automaticamente un .zip que contiene los tres reportes. En conclusion, he cubierto los requisitos minimos de la prueba, creado una pequeña API y un frontend basico para interactuar. Hago incapie en que debe ser Google Chrome el navegador ya que yo uso de normal Firefox y me daba errores. La prueba esta hecha asumiendo que los archivos .csv tienen el formato correcto.
 
 # Iniciar el Proyecto
 
 Para iniciar el servidor de desarrollo, ejecuta el siguiente comando en la consola 
 en el directorio donde se encuentra el manage.py:
 
-```python
+```
 python .\manage.py runserver
 ```
 

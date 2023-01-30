@@ -17,12 +17,12 @@ class Reports:
         productCost = self.products["cost"] 
         order_prices = pd.DataFrame(columns=["id","total"]) 
 
-        for i, row in self.orders.iterrows():
-            id = row[0] # id de la fila i
+        for indexOrders, row in self.orders.iterrows():
+            id = row[0] # id de la fila 
             productsOrderList = row[2] # lista de productos de la fila i
             productsOrderList = [int(x) for x in productsOrderList.split(" ")] # Convierto de string a lista de int
             totalCost = 0
-            # Hago el sumatorio del precio de cpytbhada producto de la orden en totalCost y inserto en el DataFrame
+            # Hago el sumatorio del precio de cada producto de la orden en totalCost y inserto en el DataFrame
             for i in productsOrderList:
                 totalCost += productCost[i]
             order_prices.loc[id] = [id,totalCost] 
@@ -38,7 +38,7 @@ class Reports:
                     customer_ids: Lista de todos los ID's que han comprado ese producto (Separados por un espacio)
         """
         productCost = self.products["cost"]
-        productCustomers = {} # Diccionario con entrada: id del producto y valor lista de IDs de los customers que lo han comprado
+        productCustomers = {} # Diccionario con clave: id del producto y valor lista de IDs de los customers que lo han comprado
         pCustomers = pd.DataFrame(columns=["id","customer_ids"])
         
         # Inicializacion de cada entrada a lista vacia
@@ -46,8 +46,8 @@ class Reports:
             productCustomers[id] = []
 
         for indexOrder, row in self.orders.iterrows():
-            customer = row[1] # customer de la orden i
-            productsOrderList = row[2] # lista de productos de la orden i
+            customer = row[1] # customer de la orden 
+            productsOrderList = row[2] # lista de productos de la orden 
             productsOrderList = [int(x) for x in productsOrderList.split(" ")] #Convierto de string a lista de int
             # Inserto el ID del customer a la lista de IDs de customers de los productos que ha comprado
             for p in productsOrderList:
@@ -74,16 +74,16 @@ class Reports:
         customerRanking = pd.DataFrame(columns=["id","name","lastname", "total"]) 
         productCost = self.products["cost"]
 
-        for indexCustumer, row in self.customers.iterrows():
+        for indexCustomer, row in self.customers.iterrows():
             clientId = row[0] # id del Cliente
             clientName = row[1] # nombre del Cliente
             clientLastName = row[2] # apellidos del Cliente
-            ordersFromCustomer = self.orders[self.orders["customer"] == indexCustumer] #Ordenes realizadas por el cliente con id igual a i
+            ordersFromCustomer = self.orders[self.orders["customer"] == indexCustomer] #Ordenes realizadas por el cliente con id igual a indexCustomer
             totalCost = 0
             for indexOrder, row in ordersFromCustomer.iterrows():
-                productsOrderList = row[2] # Obtengo la lista de productos de la orden i
+                productsOrderList = row[2] # Obtengo la lista de productos de la orden 
                 productsOrderList = [int(x) for x in productsOrderList.split(" ")] # Convierto de string a lista de int
                 totalCost += sum(productCost[productId] for productId in productsOrderList) # Sumatorio del coste de todos los productos de la orden
-            customerRanking.loc[clientId] = [clientId, clientName, clientLastName, totalCost]
-
+            customerRanking.loc[clientId] = [clientId, clientName, clientLastName, totalCost] # Añado la fila al DataFrame
+        customerRanking = customerRanking.sort_values(by="total", ascending=False) #Ordeno las filas por el valor de la columna "toal" en orden descendente(mayor a menor)
         return customerRanking

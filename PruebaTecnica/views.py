@@ -9,15 +9,17 @@ def uploadfiles(request):
 
 def downloadfiles(request):
 
-    productscsv = request.FILES['file1']
+    productscsv = request.FILES['file1'] 
     orderscsv = request.FILES['file2']
     customerscsv = request.FILES['file3']
 
-    reports = Reports(productscsv, orderscsv, customerscsv)
+    #Creo el objeto reports
+    reports = Reports(productscsv, orderscsv, customerscsv) 
 
-    report1 = reports.createReport1().to_csv()
-    report2 = reports.createReport2().to_csv()
-    report3 = reports.createReport3().to_csv()
+    #Creo los reportes
+    orderPricesReport = reports.createReport1().to_csv(index=False)
+    productsCustomersReport = reports.createReport2().to_csv(index=False)
+    customerRankingReport = reports.createReport3().to_csv(index=False)
 
     #Respuesta HTTP descargable 
     response = HttpResponse(content_type='application/zip')
@@ -25,9 +27,9 @@ def downloadfiles(request):
 
     # Crea el archivo zip
     with zipfile.ZipFile(response, mode='w') as zf:
-        zf.writestr("order_prices.csv", report1)
-        zf.writestr("products_customers.csv", report2)
-        zf.writestr("customer_ranking.csv", report3)
+        zf.writestr("order_prices.csv", orderPricesReport)
+        zf.writestr("products_customers.csv", productsCustomersReport)
+        zf.writestr("customer_ranking.csv", customerRankingReport)
  
     return response
 
